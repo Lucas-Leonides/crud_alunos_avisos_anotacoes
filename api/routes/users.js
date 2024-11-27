@@ -1,8 +1,8 @@
 import express from "express";
-import { getUsers, addUser, updateUser, deleteUser } from "./controllers/user.js";
-import { getAvisos, addAviso, updateAviso, deleteAviso } from "./controllers/avisos.js";
-import { getAlunos, addAluno, updateAluno, deleteAluno } from "./controllers/alunos.js";
-import { getAnotacoes, addAnotacao, updateAnotacao, deleteAnotacao } from "./controllers/anotacoes.js";
+import { getUsers, addUser, updateUser, deleteUser } from "../controllers/user.js"; 
+import { getAvisos, addAviso, updateAviso, deleteAviso } from "../controllers/avisos.js"; 
+import { getAlunos, addAluno, updateAluno, deleteAluno } from "../controllers/alunos.js"; 
+import { getAnotacoes, addAnotacao, updateAnotacao, deleteAnotacao } from "../controllers/anotacoes.js"; 
 
 const router = express.Router();
 

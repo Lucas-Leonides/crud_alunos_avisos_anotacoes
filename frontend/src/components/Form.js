@@ -79,14 +79,14 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://localhost:8800", {
-          nome: user.nome.value,
+        .post("http://localhost:8800/api/users", { 
           email: user.email.value,
           fone: user.fone.value,
           data_nascimento: user.data_nascimento.value,
-        })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
+  })
+    .then(({ data }) => toast.success(data))
+    .catch(({ response }) => toast.error(response?.data || "Erro ao adicionar usuário")); // Melhor tratamento de erro
+        
     }
 
     user.nome.value = "";

@@ -25,21 +25,21 @@ function App() {
 
   const getUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8800");
+      const res = await axios.get("http://localhost:8800/api/users"); // URL correta
       setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
     } catch (error) {
-      toast.error(error);
+      toast.error(error.response?.data || "Erro ao buscar usuários"); // Melhor tratamento de erro
     }
   };
 
   useEffect(() => {
     getUsers();
-  }, [setUsers]);
+  }, []); // Apenas uma vez ao montar o componente
 
   return (
     <>
       <Container>
-        <Title>USUÁRIOS</Title>
+        <Title>Alunos</Title>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
         <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
