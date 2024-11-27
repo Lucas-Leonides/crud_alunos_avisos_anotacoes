@@ -1,51 +1,21 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Importa o Router e as Rotas
 import GlobalStyle from "./styles/global";
-import styled from "styled-components";
-import Form from "./components/Form.js";
-import Grid from "./components/Grid";
-import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 800px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-`;
-
-const Title = styled.h2``;
+import Home from "./components/Home"; // Importe o novo componente Home
+import Alunos from "./components/Alunos"; // Importar o componente Alunos
+import Anotacoes from "./components/Anotacoes"; // Importar o componente Anotacoes
+import Avisos from "./components/Avisos"; // Importar o componente Avisos
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [onEdit, setOnEdit] = useState(null);
-
-  const getUsers = async () => {
-    try {
-      const res = await axios.get("http://localhost:8800/api/users"); // URL correta
-      setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
-    } catch (error) {
-      toast.error(error.response?.data || "Erro ao buscar usuários"); // Melhor tratamento de erro
-    }
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []); // Apenas uma vez ao montar o componente
-
   return (
-    <>
-      <Container>
-        <Title>Alunos</Title>
-        <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
-        <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
-      </Container>
-      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
+    <Router>
       <GlobalStyle />
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/alunos" element={<Alunos />} />
+        <Route path="/anotacoes" element={<Anotacoes />} />
+        <Route path="/avisos" element={<Avisos />} />
+      </Routes>
+    </Router>
   );
 }
 
